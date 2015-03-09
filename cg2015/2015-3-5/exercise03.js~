@@ -13,4 +13,4 @@ for (i=1;i<=10;i++){
 	result+=value;
 	result+="\n";
 	}
-window.alert(result);
+console.log(result);

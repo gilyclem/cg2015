@@ -10,4 +10,4 @@ for (i=1;i<=10;i++){
 	result+=i*j;
 	result+="\n";
 	}
-window.alert(result);
+console.log(result);
