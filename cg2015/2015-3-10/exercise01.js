@@ -1,0 +1,30 @@
+/*
+exercise01a write a function that pushes into an array the first n natural numbers
+exercise01b filter out odd number and return the even ones
+exercise01c double each even number obtained
+exercise01d return only numbers divisible by 4
+exercise01e sum all the remaining numbers*/
+
+function a(n)	{
+var a = [];
+var i;
+for (i=0;i<n;i++)
+	a.push(i);
+return a;	}
+
+function b(item) 		{
+	return (item % 2 ===0);	}
+
+function c(item)	{
+	return item*2;	}
+
+function d(item)		{
+	return (item % 4 ===0);	}
+
+function e(prev, cur)	{
+	return prev + cur;		}
+ 
+var result = a(10).filter(b).map(c).filter(d).reduce(e); 
+
+console.log(result); //40
+console.log("\n");
