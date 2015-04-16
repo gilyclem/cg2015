@@ -122,16 +122,16 @@ function createHead() {
 	var sphereMaterial = new THREE.MeshLambertMaterial( { color: 0xA00000 } );
 	var sphereGeometry = new THREE.SphereGeometry(sphereRadius,32,16);
 	var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
-	sphere.position.y= 200+cylinderHeight;	
+	sphere.position.y= 160+cylinderHeight;	
 
 	//cappello
 	var cylinderMaterial = new THREE.MeshLambertMaterial( { color: 0x0000D0 } );
 	var cylinderGeometry1=new THREE.CylinderGeometry(71,71,10,32); //ok
 	var cylinderGeometry2=new THREE.CylinderGeometry(40,40,70,32);	//ok
 	var cylinder1 = new THREE.Mesh(cylinderGeometry1,cylinderMaterial);
-	cylinder1.position.y= 250+cylinderHeight;
+	cylinder1.position.y= 160+40+cylinderHeight;
 	var cylinder2 = new THREE.Mesh(cylinderGeometry2,cylinderMaterial);
-	cylinder2.position.y= 290+cylinderHeight;
+	cylinder2.position.y= 160+70+cylinderHeight;
 
 	
 	scene.add(cylinder1);
