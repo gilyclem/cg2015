@@ -1,0 +1,67 @@
+#STRUTTURE GERARCHICHE
+#costruisce la matrice di traslazione
+#i parametri sono in numero da 1 a 3: di quanto traslare in x, y e z
+def t(*args):
+	d=len(args)
+	mat=scipy.identity(d+1) #considero una coordinata omogenea aggiunta
+	for k in range(d):
+		mat[k,d]=args[k] #cambia l'ultimo elemento di ogni riga
+	return mat.view(Mat)
+
+#costruisce la matrice di cambio di scala
+#i parametri sono in numero da 1 a 3: di quanto scalare in x, y e z
+def s(*args):
+	d=len(args)
+	mat=scipy.identity(d+1) #considero una coordinata omogenea aggiunta
+	for k in range(d):
+		mat[k,k]=args[k] #cambia l'elemento diagonale
+	return mat.view(Mat)
+
+#ALGORITMO DI TRAVERSAL
+#funzione di alto livello, richiama la funzione ricorsiva
+def algorithm(data): #i dati sono la lista di strutture da visitare
+	CTM,stack=["I"],[] #current trasformation matrix, durante la visita della rete è aggiornata per poi moltiplicare i dati che incontra e trasformarli nel sistema di riferimento della radice
+#stack è una pila su cui pongo i valori successivi della CTM
+	__traverse(CTM,stack,data)
+
+#visita in profondità
+def __traverse(CTM,stack,o):
+	for i in range(len(o)): #la lunghezza della lista è il numero di figli
+#se il figlio è un oggetto geometrico lo trasformo nelle coordinate della radice moltiplicandolo per la CTM
+		if ISNUM(o[i]): print o[i], REVERSE(CTM)
+#se il figlio è una matrice di trasformazione lo appendo a CTM
+		elif ISSTRING(o[i]): CTM.append(o[i])
+#se il figlio è una sottostruttura uso la ricorsione ma prima inserisco il padre nello stack
+		elif ISSEQ(o[i]): stack.append(o[i])
+			__traverse(CTM,stack,o[i])
+			CTM = CTM[:-len(stack)]
+
+
+
+def __traverse(CTM,stack,o):
+	for i in range(len(o)):
+		if ISNUM(o[i]): print o[i], REVERSE(CTM)
+		elif ISSTRING(o[i]): CTM.append(o[i])
+		elif ISSEQ(o[i]):
+			stack.append(o[i])
+			__traverse(CTM,stack,o[i])
+			CTM = CTM[:-len(stack)]
+
+#utilizzo
+data = [1,"A",2,3,"B",[4,"C",5],[6,"D","E",7,8],9]
+print algorithm(data)
+
+#Esercizio TAVOLI E SEDIE
+square = larCuboids([1,1]) #creo un quadrato in 2d
+table = larApply(t(-.5,-.5))(square) #traslo il centro del quadrato nell'origine
+chair = larApply(s(.35,.35))(table) #la sedia è piu piccola
+chair1 = larApply(t(.75,0))(chair)
+chair2 = larApply(r(PI/2))(chair1)
+chair3 = larApply(r(PI/2))(chair2)
+chair4 = larApply(r(PI/2))(chair3)
+scene = Struct([table,chair1,chair2,chair3,chair4])
+VIEW(SKEL_1(STRUCT(MKPOLS(struct2lar(scene))))
+
+
+
+

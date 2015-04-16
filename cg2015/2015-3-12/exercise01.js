@@ -1,4 +1,5 @@
 //verifica quale oggetto abbia size maggiore
+//self-invoking function
 (function() {
   var larger = function(o1, o2) {
     if ( o1.size > o2.size ) {

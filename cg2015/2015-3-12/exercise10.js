@@ -5,8 +5,8 @@ exercise10b
 define a SecurityDoor constructor function that inherits the bhehaviour from Door but once closed a security_door instance can be locked via the lock method. Invoking the unlock method, bring the security_door back to the close state. */
 
 //porta: gli stati sono open e closed
-function Door () {
-this.state="";
+function Door (state) {
+this.state=state||"closed";//non funziona con numeri questa inizializzazione 0=false
 }
 
 Door.prototype.open = function () {
@@ -22,11 +22,12 @@ Door.prototype.info = function () {
 };
 
 //security door: sottoclasse
-function SecurityDoor () {
-  Door.call(); // call "super" constructor
+function SecurityDoor (state) {
+  Door.call(this,state); // call "super" constructor
 }
-
+//il prototipo della sottoclasse ha prototipo della superclasse
 SecurityDoor.prototype = Object.create(Door.prototype); //crea un nuovo prototipo copia di quello di door
+//in security door trovo open() e close()
 SecurityDoor.prototype.constructor = SecurityDoor;	//cambia funzione costruttrice rispetto a door	
 SecurityDoor.prototype.lock = function () {		//aggiungo il metodo lock che blocca se è chiusa
 	if (this.state==="closed"){  

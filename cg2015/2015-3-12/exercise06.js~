@@ -13,6 +13,7 @@ if (!(this instanceof MusicBox)) return new MusicBox();
 this.album_list=[];	//tutti gli album del box
 }  
 
+/*
 //posso aggiungere molti album con una sola istruzione sfruttando gli arguments
 MusicBox.prototype.addAlbum=function(){
   var n = arguments.length;
@@ -20,6 +21,12 @@ MusicBox.prototype.addAlbum=function(){
   for (i = 0; i < n; i += 1) { //itera sui parametri
     this.album_list.push(arguments[i]);	//inserisce l'album nella lista
   }
+  };
+*/
+
+//In alternativa posso aggiungere molti album con una sola istruzione sfruttando gli arguments
+MusicBox.prototype.addAlbum=function(){
+    Array.prototype.push.apply(this.album_list,arguments);
   };
 
 //incrementa times_played e stampa una stringa
