@@ -17,8 +17,8 @@ VIEW(EXPLODE(1.2,1.2,1)(MKPOLS((V,EV))))
 #Topologia
 csrFV = csrCreate(FV)
 csrEV = csrCreate(EV)
-print csrFV
 print csr2DenseMatrix(csrFV)
+print csr2DenseMatrix(csrEV)
 
 #ESERCIZIO 2 Estrazione di faccette
 #Modificare la funzione in modo che le faccette estratte siano coerentemente orientate
