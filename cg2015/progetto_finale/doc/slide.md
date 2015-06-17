@@ -136,5 +136,13 @@ Si tratta di un ambiente che contiene molti giochi per bambini e un piccolo palc
 ###Sala per lo staff
 Provvista di computer. Permette di sorvegliare la salute dei pazienti mediante i monitor.
 
+**Bibliografia**
+
+Modern Trends in Planning and Designing of Hospitals: Principles and Practice - Gupta, Kant - JAYPEE
+Wards onwards forwards - Evolution of hospital ward design - Welsh Health Estate
+Elementi di progettazione ospedaliera: progettazione degli ambiti di degenza - Marco Morandotti
+
+
+
 
 
