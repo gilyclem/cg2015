@@ -36,8 +36,6 @@
 
 **Legenda**: 
 
-![alt text](NIGHTINGALE.jpg "Nightingale")
-
 Dormitori *'nightingale'*, 1930 circa: ogni camerata ospita fino a 36 letti. Le finestre sono su entrambi i lati, accanto ai letti, pertanto i pazienti sono esposti a correnti d'aria e luce forte sugli occhi. Lo staff ha un tavolo/scrivania in una stanza ad un capo del dormitorio. Di fronte un servizio igienico. Dall'altro lato del dormitorio una sala comune di ritrovo. Problema evidente è quello della mancanza di privacy per i parienti. In versioni successive sono previste alcune camere più piccole o singole per pazienti con infezioni.
 
 Divisione in *'bays'*, 1980 circa: ogni bay ospita 6, a volte 4 letti, in stanze situate lungo un corridoio principale, con sanitari e sale per il personale sul lato opposto. Un'unità di cura consiste di quattro o cinque bays ed una sala infermieri e quattro camere singole.
