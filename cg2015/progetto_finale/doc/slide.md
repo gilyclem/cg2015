@@ -131,11 +131,10 @@ Si tratta di un ambiente che contiene molti giochi per bambini e un piccolo palc
 
 ##Caso di studio 3: Clinical Trial Centre - Chinese University Hong Kong
 
-###Sala per lo staff
-Provvista di computer. Permette di sorvegliare la salute dei pazienti mediante i monitor.
-
 ![Alt text](img/staff.jpg)
 
+###Sala per lo staff
+Provvista di computer. Permette di sorvegliare la salute dei pazienti mediante i monitor.
 
 
 

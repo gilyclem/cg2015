@@ -133,6 +133,7 @@ Si tratta di un ambiente che contiene molti giochi per bambini e un piccolo palc
 
 ###Sala per lo staff
 Provvista di computer. Permette di sorvegliare la salute dei pazienti mediante i monitor.
+
 ![Alt text](img/staff.jpg)
 
 
