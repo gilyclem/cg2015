@@ -36,7 +36,7 @@
 
 **Legenda**: 
 
-![Alt text](/doc/img/NIGHTINGALE.jpg "Nightingale")
+![Alt text](NIGHTINGALE.jpg "Nightingale")
 
 Dormitori *'nightingale'*, 1930 circa: ogni camerata ospita fino a 36 letti. Le finestre sono su entrambi i lati, accanto ai letti, pertanto i pazienti sono esposti a correnti d'aria e luce forte sugli occhi. Lo staff ha un tavolo/scrivania in una stanza ad un capo del dormitorio. Di fronte un servizio igienico. Dall'altro lato del dormitorio una sala comune di ritrovo. Problema evidente è quello della mancanza di privacy per i parienti. In versioni successive sono previste alcune camere più piccole o singole per pazienti con infezioni.
 
