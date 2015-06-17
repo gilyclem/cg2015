@@ -45,7 +45,7 @@ I vantaggi principali:
 * I pazienti hanno le finestre di lato perciò non soffrono per i raggi solari;
 * Maggiore privacy.
 
-Stanze individuali, ospedali in costruzione: la scelta è guidata dalle crescenti aspettative dei pazienti, dalla necessità di privacy e dalla nascita dei 'superbug', ceppi di batteri che hanno sviluppato resistenza agli antibiotici. I contro di questa organizzazione sono la crescita della superficie necessaria e dei costi di realizzazione. L'idea che la supervisione di stanze singole richieda più staff è stata rigettata.
+*Stanze individuali*, ospedali in costruzione: la scelta è guidata dalle crescenti aspettative dei pazienti, dalla necessità di privacy e dalla nascita dei 'superbug', ceppi di batteri che hanno sviluppato resistenza agli antibiotici. I contro di questa organizzazione sono la crescita della superficie necessaria e dei costi di realizzazione. L'idea che la supervisione di stanze singole richieda più staff è stata rigettata.
 I vantaggi principali:
 
 * Maggior controllo delle infezioni;
@@ -57,5 +57,60 @@ I vantaggi principali:
 * Confidenzialità ed apertura nell'informare i pazienti;
 * Privacy e decoro;
 * Migliore contatto con familiari e staff.
+
+##Aspetti dimensionali - Requisiti delle sale di degenza
+
+* Dimensioni minime per letto 6mq*;
+* Altezza minima del vano 3,20m*;
+* Dimensioni minime camere da letto singole 9mq*;
+* Dimensioni minime delle vetrate 2mq*.
+
+ \* Pubblicato nella Gazzetta Ufficiale della Repubblica Italiana n.187
+
+**Camere singole**: superficie di 17mq per la stanza e circa 3,6mq per il bagno corrisponde alla possibilità per un paziente di soggiornare in compagnia di un parente, soprattutto per quanto rigurda il reparto pediatrico.
+
+**Camere doppie**: superficie di 23mq per la camera e doppi servizi di 3,6mq
+
+##Caratteristiche ambientali
+
+* **Luminosità**: illuminazione generale 150-200 lux, illuminazione per esaminare i pazienti 500-750-1000 lux
+* **Ventilazione naturale** garantita dalle finestre
+* **Comfort termico** ed acustico garantito da pareti insonorizzate ed impianto di climatizzazione
+
+##Aspetti funzionali
+
+* Posizione del servizio igienico all’interno della stanza
+*  Partizioni interne di tipo mobile per garantire la privacy nelle stanze doppie pur favorendo la socializzazione
+* Infissi esterni e sistemi di oscuramento: vetri oscurati
+
+##Qualità dei materiali di finitura
+
+* Punto di vista igienico: tutte le superfici devono essere lavabili
+* Qualità estetica: colori e materiali selezionati per trasmettere all'utente un senso di accoglienza e naturalità
+* Sicurezza
+* In ogni camera le reti impiantistiche sono posate dietro pannelli removibili in legno
+
+##Tipologia degli arredi
+
+* Ergonomia
+* Praticità manutentiva
+* Valore estetico
+
+##Caso di studio: American Hospital Dubai
+
+###Stanza singola
+
+###Sala con nurse station per informazioni e attesa dei visitatori all'ingresso del reparto
+
+###Sala comune per pazienti
+
+###Sala comune per bambini
+Si tratta di un ambiente che contiene molti giochi per bambini e un piccolo palco per produzioni teatrali. I bambini hanno un grande beneficio nello stare insieme.
+
+###Sala per lo staff
+Provvista di computer
+
+
+
 
 
