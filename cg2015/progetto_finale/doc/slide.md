@@ -139,7 +139,9 @@ Provvista di computer. Permette di sorvegliare la salute dei pazienti mediante i
 **Bibliografia**
 
 Modern Trends in Planning and Designing of Hospitals: Principles and Practice - Gupta, Kant - JAYPEE
+
 Wards onwards forwards - Evolution of hospital ward design - Welsh Health Estate
+
 Elementi di progettazione ospedaliera: progettazione degli ambiti di degenza - Marco Morandotti
 
 
