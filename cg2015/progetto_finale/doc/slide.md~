@@ -3,14 +3,14 @@
 
 #Giulia Clementi
 
-  *  Introduzione
+  *  Introduzione: reparti ed attività
   *  Evoluzione nel design
   *  Normative
   *  Requisiti
   *  Dettaglio di realizzazione per le diverse unità ambientali
 
 #Introduzione
-##Terminologia
+##Reparti ed attività
 ###Patient
 
 * *Outpatient*: paziente che visiti la clinica o l'ospedale per diagnosi o trattamenti di durata inferiore a ventiquattro ore;
