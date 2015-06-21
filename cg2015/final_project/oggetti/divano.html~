@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Divano</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>  
+    <!-- JavaScript libraries -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+    <script src="assets/libs/TrackballControls.js"></script>
+    <!-- Javascript code that runs our Three.js examples --> 
+    <script>
+      // once everything is loaded, we run our Three.js stuff.
+      $(function () {
+         var stats = initStats();
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // create a render and set the size
+        var renderer = new THREE.WebGLRenderer();
+	var trackballControls = new THREE.TrackballControls(camera);
+        renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+	var divano = new THREE.Object3D();
+
+	var bracciolo_geo = new THREE.Shape();
+	bracciolo_geo.moveTo( 0, 0 );
+	bracciolo_geo.lineTo( 1, 0 );
+	bracciolo_geo.lineTo( 1, 1 );
+	bracciolo_geo.lineTo( 0, 0.5);
+	bracciolo_geo.lineTo( 0, 0);
+
+	var material = new THREE.MeshLambertMaterial( {color: 0xdcdcdc} );
+	var texture = THREE.ImageUtils.loadTexture("textures/grigio.jpg");
+	material.map = texture;
+
+	var material2 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
+	var texture2 = THREE.ImageUtils.loadTexture("textures/grigio.jpg");
+	material2.map = texture2;
+
+	var material3 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
+	var texture3 = THREE.ImageUtils.loadTexture("textures/legno.jpg");
+	material3.map = texture3;
+
+	var material4 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
+	var texture4 = THREE.ImageUtils.loadTexture("textures/grigio.jpg");
+	material4.map = texture4;
+
+	var extrudeSettings = {
+	amount:0.2,
+	bevelEnabled:false
+	};
+
+	var bracciolo_geo2 = new THREE.ExtrudeGeometry( bracciolo_geo, extrudeSettings );
+	var bracciolo1 = new THREE.Mesh( bracciolo_geo2, material  ) ;
+	var bracciolo2 = new THREE.Mesh( bracciolo_geo2, material  ) ;			
+	bracciolo2.position.z+=2;
+	
+	var schienale_geo = new THREE.BoxGeometry( 0.2,1,2.2 );
+	var schienale = new THREE.Mesh( schienale_geo, material  ) ;
+
+	var cuscino_geo = new THREE.BoxGeometry( 1.8,0.2,0.8 );
+	var cuscino_geo2 = new THREE.BoxGeometry( 1.8,0.8,0.2 );
+	var base = new THREE.Mesh( cuscino_geo, material  ) ;
+	base.rotation.y+=Math.PI/2;
+	base.position.x+=0.4;
+	base.position.z+=1.1;
+	base.position.y+=0.1;
+	var base2_geo = new THREE.BoxGeometry( 2.2,0.05,1.1 );
+	var base2 = new THREE.Mesh( base2_geo, material3  ) ;
+	base2.rotation.y+=Math.PI/2;
+	base2.position.x+=0.55;
+	base2.position.z+=1.1;
+	base2.position.y-=0.02;
+	var cuscino1 = new THREE.Mesh( cuscino_geo, material2  ) ;
+	cuscino1.rotation.y+=Math.PI/2;
+	cuscino1.position.x+=0.45;
+	cuscino1.position.z+=1.1;
+	cuscino1.position.y+=0.2;
+	var cuscino2 = new THREE.Mesh( cuscino_geo2, material2  ) ;
+	cuscino2.rotation.y+=Math.PI/2;
+	
+	var piede_geo = new THREE.CylinderGeometry( 0.09, 0.02, 0.4 , 4 );
+	var piede1 = new THREE.Mesh( piede_geo, material3 );
+	var piede2 = new THREE.Mesh( piede_geo, material3 );
+	var piede3 = new THREE.Mesh( piede_geo, material3 );
+	var piede4 = new THREE.Mesh( piede_geo, material3 );
+	piede1.position.set(1,0,2.1);
+	piede2.position.set(1,0,0.1);
+	piede3.position.set(0.15,0,2.1);
+	piede4.position.set(0.15,0,0.1);
+
+	var cuscino3_geo = new THREE.CylinderGeometry( 0.1, 0.1, 1.7 , 32 );
+	var cuscino3 = new THREE.Mesh( cuscino3_geo, material4  ) ;
+	cuscino3.rotation.x+=Math.PI/2;
+	cuscino3.position.x+=0.7;
+	cuscino3.position.z+=1.1;
+	cuscino3.position.y+=0.4;
+	cuscino2.position.x+=0.9;
+	cuscino2.position.z+=1.1;
+	cuscino2.position.y+=0.5;
+	schienale.position.set(1,0.5,1.1);	
+	divano.add(bracciolo1);
+	divano.add(bracciolo2);
+	divano.add(schienale);
+	divano.add(base);
+	divano.add(base2);
+	divano.add(cuscino1);
+	divano.add(cuscino2);
+	divano.add(piede1);
+	divano.add(piede2);
+	divano.add(piede3);
+	divano.add(piede4);
+	divano.add(cuscino3);
+	scene.add(divano);
+	divano.rotation.y+=Math.PI/2;
+
+        // position and point the camera to the center of the scene
+        camera.position.set(5,5,5);
+        camera.up = new THREE.Vector3(0,1,0);
+        camera.lookAt(scene.position);
+        // add spotlight for the shadows
+        var spotLight = new THREE.AmbientLight( 0xffffff );
+        spotLight.position.set(5,5,5);
+        scene.add(spotLight);
+        // add the output of the renderer to the html element
+        $('body').append(renderer.domElement);
+        // call the render function
+        
+        render();
+        function render() {
+          stats.update();
+	trackballControls.update();
+         // render using requestAnimationFrame
+          requestAnimationFrame(render);
+          renderer.render(scene, camera);
+        }
+        function initStats() {
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+          $('body').append(stats.domElement);
+          return stats;
+        }
+      });
+    </script>  
+ </body>
+</html>

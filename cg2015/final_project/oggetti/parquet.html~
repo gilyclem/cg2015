@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Repeat wrapping parquet</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+  <!-- JavaScript libraries -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+	<script src="assets/libs/TrackballControls.js"></script>
+  <!-- Javascript code that runs our Three.js examples --> 
+  <script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+      var stats = initStats();
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      var scene = new THREE.Scene();
+      // create a camera, which defines where we're looking at.
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // create a render and set the size
+	var trackballControls = new THREE.TrackballControls(camera);
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(0xEEEEEE, 1.0);
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+     
+      var cube = createMesh(new THREE.BoxGeometry(12, 0.2, 12));
+      cube.position.x = -7;
+      scene.add(cube);
+      
+      // position and point the camera to the center of the scene
+      camera.position.set(0,12,20);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      var ambiLight = new THREE.AmbientLight(0x141414)
+      scene.add(ambiLight);
+      var light = new THREE.DirectionalLight();
+      light.position.set(0, 30, 20);
+      scene.add(light);
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+      // call the render function
+      
+      // setup the control gui
+  
+      render();
+      function createMesh(geom) {
+        var texture = THREE.ImageUtils.loadTexture("textures/parquet3.jpg")
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        geom.computeVertexNormals();
+        var mat = new THREE.MeshPhongMaterial();
+        mat.map = texture;
+	mat.map.repeat.set(4, 4);
+        var mesh = new THREE.Mesh(geom, mat);
+        return mesh;
+      }
+      function render() {
+        stats.update();
+	trackballControls.update();      
+        // render using requestAnimationFrame
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
+      }
+      function initStats() {
+        stats = new Stats();
+        stats.setMode(0); // 0: fps, 1: ms
+        $('body').append(stats.domElement);
+        return stats;
+      }
+    });
+  </script>  
+ </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Comodino</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>  
+    <!-- JavaScript libraries -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+    <script src="assets/libs/TrackballControls.js"></script>
+    <!-- Javascript code that runs our Three.js examples --> 
+    <script>
+      // once everything is loaded, we run our Three.js stuff.
+      $(function () {
+         var stats = initStats();
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // create a render and set the size
+        var renderer = new THREE.WebGLRenderer();
+	var trackballControls = new THREE.TrackballControls(camera);
+        renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+	var actdrop = new THREE.Object3D();
+	var actdrop_geo = new THREE.BoxGeometry( 0.3, 0.3 , 0.5 );
+	var frontale_geo = new THREE.PlaneGeometry( 0.3, 0.5 );
+	var material = new THREE.MeshLambertMaterial( {color: 0xdcdcdc} );
+	var material2 = new THREE.MeshLambertMaterial( {color: 0xdcdcdc} );
+	var material3 = new THREE.MeshLambertMaterial( {color: 0x0000cd} );
+	var mobiletto = new THREE.Mesh( actdrop_geo, material );
+	var texture = THREE.ImageUtils.loadTexture("textures/cassetto.jpg");
+	var texture2 = THREE.ImageUtils.loadTexture("textures/magazine.jpg")
+	var rivista_geo = new THREE.PlaneGeometry( 0.1, 0.17 );
+	material2.map = texture;
+	material3.map = texture2;
+	var rivista = new THREE.Mesh(rivista_geo, material3);
+	var frontale = new THREE.Mesh(frontale_geo, material2);
+	frontale.material.side = THREE.DoubleSide;
+	frontale.rotation.x+=Math.PI/2;
+	frontale.position.y-=0.155;
+	rivista.position.z+=0.255;
+	rivista.rotation.z+=Math.PI/6;
+	actdrop.add(frontale);
+	actdrop.add(mobiletto);
+	actdrop.add(rivista);
+	actdrop.rotation.x-=Math.PI/2;
+	scene.add(actdrop);
+        // position and point the camera to the center of the scene
+        camera.position.set(1,1,1);
+        camera.up = new THREE.Vector3(0,1,0);
+        camera.lookAt(scene.position);
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set(1,1,1);
+        scene.add(spotLight);
+	var Light = new THREE.AmbientLight( 0xcdcdcd );
+       Light.position.set(3,3,3);
+        scene.add(Light);
+        // add the output of the renderer to the html element
+        $('body').append(renderer.domElement);
+        // call the render function
+        
+        render();
+        function render() {
+          stats.update();
+	trackballControls.update();
+         // render using requestAnimationFrame
+          requestAnimationFrame(render);
+          renderer.render(scene, camera);
+        }
+        function initStats() {
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+          $('body').append(stats.domElement);
+          return stats;
+        }
+      });
+    </script>  
+ </body>
+</html>

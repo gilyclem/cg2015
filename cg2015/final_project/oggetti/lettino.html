@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Lettino</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>  
+    <!-- JavaScript libraries -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+    <script src="assets/libs/TrackballControls.js"></script>
+    <!-- Javascript code that runs our Three.js examples --> 
+    <script>
+      // once everything is loaded, we run our Three.js stuff.
+      $(function () {
+        var stats = initStats();
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // create a render and set the size
+        var renderer = new THREE.WebGLRenderer();
+	var trackballControls = new THREE.TrackballControls(camera);
+        renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+	var bed = new THREE.Object3D();
+
+	var hpiede = 0.5;
+	var piede_geo = new THREE.CylinderGeometry( 0.03, 0.03, hpiede , 32 );
+	var asse1_geo = new THREE.CylinderGeometry( 0.03, 0.03, 2 , 32 );
+	var asse2_geo = new THREE.CylinderGeometry( 0.03, 0.03, 1 , 32 );
+	var ruota_geo = new THREE.CylinderGeometry( 0.1, 0.1, 0.02 , 32 );
+	var anelloruota_geo = new THREE.RingGeometry( 0.05, 0.07, 32 );
+	var metal = new THREE.MeshLambertMaterial( {color: 0xa8bac3} );
+	var material = new THREE.MeshLambertMaterial( {color: 0xffffff} );
+	var materasso_mat = new THREE.MeshLambertMaterial( {color: 0xffffcc} );
+
+	var piede1 = new THREE.Mesh( piede_geo, metal );
+	var ruota1 = new THREE.Mesh( ruota_geo, material );
+	//var anelloruota1 = new THREE.Mesh( anelloruota_geo, metal );
+	//anelloruota1.position.z+=0.05;
+	//anelloruota1.position.y-=0.03;
+	//anelloruota1.rotation.x+=Math.PI/2;
+	//ruota1.add(anelloruota1);
+	ruota1.rotation.x+=Math.PI/2;
+	ruota1.position.y-=0.25;
+	piede1.add(ruota1);
+
+	var piede2 = new THREE.Mesh( piede_geo, metal );
+	piede2.position.set(2,0,0);
+	var ruota2 = new THREE.Mesh( ruota_geo, material );
+	ruota2.rotation.x+=Math.PI/2;
+	ruota2.position.y-=0.25;
+	piede2.add(ruota2);
+
+	var piede3 = new THREE.Mesh( piede_geo, metal );
+	piede3.position.set(2,0,1);
+	var ruota3 = new THREE.Mesh( ruota_geo, material );
+	ruota3.rotation.x+=Math.PI/2;
+	ruota3.position.y-=0.25;
+	piede3.add(ruota3);
+
+	var piede4 = new THREE.Mesh( piede_geo, metal );
+	piede4.position.set(0,0,1);
+	var ruota4 = new THREE.Mesh( ruota_geo, material );
+	ruota4.rotation.x+=Math.PI/2;
+	ruota4.position.y-=0.25;
+	piede4.position.set(0,0,1); 
+	piede4.add(ruota4);
+
+	var hmaterasso=0.3;
+
+	var materasso_geo = new THREE.BoxGeometry( 1.8, hmaterasso , 0.8 );
+	var materasso2_geo = new THREE.CylinderGeometry( 0.15, 0.15, 1.8 , 32 );
+	var materasso3_geo = new THREE.CylinderGeometry( 0.15, 0.15, 0.8 , 32 );
+	var materasso4_geo = new THREE.SphereGeometry( 0.15);
+	var materasso1 = new THREE.Mesh( materasso2_geo, materasso_mat );
+	var materasso2 = new THREE.Mesh( materasso2_geo, materasso_mat );
+	var materasso3 = new THREE.Mesh( materasso3_geo, materasso_mat );
+	var materasso4 = new THREE.Mesh( materasso3_geo, materasso_mat );
+	var materasso5 = new THREE.Mesh( materasso4_geo, materasso_mat );
+	var materasso6 = new THREE.Mesh( materasso4_geo, materasso_mat );
+	var materasso7 = new THREE.Mesh( materasso4_geo, materasso_mat );
+	var materasso8 = new THREE.Mesh( materasso4_geo, materasso_mat );
+	materasso1.rotation.z+=Math.PI/2;	
+	materasso2.rotation.z+=Math.PI/2;	
+	materasso1.position.z+=0.4;
+	materasso2.position.z-=0.4;
+	materasso3.rotation.x+=Math.PI/2;
+	materasso3.position.x+=0.9;
+	materasso4.rotation.x+=Math.PI/2;
+	materasso4.position.x-=0.9;
+	materasso5.position.set(0.9,0,0.4);
+	materasso6.position.set(-0.9,0,0.4);
+	materasso7.position.set(0.9,0,-0.4);
+	materasso8.position.set(-0.9,0,-0.4);
+	var materasso = new THREE.Mesh( materasso_geo, materasso_mat );
+	materasso.position.set(1,0.4,0.5);
+	materasso.add(materasso1);
+	materasso.add(materasso2);
+	materasso.add(materasso3);
+	materasso.add(materasso4);	
+	materasso.add(materasso5);	
+	materasso.add(materasso6);
+	materasso.add(materasso7);
+	materasso.add(materasso8);
+
+	var asse1 = new THREE.Mesh( asse1_geo, metal );
+	var asse2 = new THREE.Mesh( asse1_geo, metal );
+	var asse3 = new THREE.Mesh( asse2_geo, metal );
+	var asse4 = new THREE.Mesh( asse2_geo, metal );
+	asse1.rotation.z+=Math.PI/2;
+	asse2.rotation.z+=Math.PI/2;	
+	asse3.rotation.x+=Math.PI/2;
+	asse4.rotation.x+=Math.PI/2;
+	asse1.position.set(1,0,0);
+	asse2.position.set(1,0,1);
+	asse3.position.set(0,0,0.5);
+	asse4.position.set(2,0,0.5);
+
+	var testiera_geo = new THREE.Shape();
+	testiera_geo.moveTo( 0.1, 0 );
+	testiera_geo.lineTo( 0.9, 0 );
+	testiera_geo.lineTo( 1, 0.3 );
+	testiera_geo.lineTo( 0.8, 0.5);
+	testiera_geo.lineTo( 0.7, 0.4 );
+	testiera_geo.lineTo( 0.3, 0.4 );
+	testiera_geo.lineTo( 0.2, 0.5);
+	testiera_geo.lineTo( 0, 0.3 );
+	testiera_geo.lineTo( 0.1, 0 );
+
+	var testiera_geo3 = new THREE.Shape();
+	testiera_geo3.moveTo( 0, 0 );
+	testiera_geo3.lineTo( 0.2, 0.2 );
+	testiera_geo3.lineTo( 0.8, 0.2 );
+	testiera_geo3.lineTo( 1.01, 0);
+	testiera_geo3.lineTo( 0, 0 );
+
+
+	var hole1 = new THREE.Path();
+	hole1.moveTo(0.2, 0.27);
+	hole1.lineTo(0.4, 0.27);
+	hole1.lineTo(0.4, 0.34);
+	hole1.lineTo(0.2, 0.34);
+	hole1.lineTo(0.2, 0.27);
+
+	var hole3 = new THREE.Path();
+	hole3.moveTo(0.6, 0.27);
+	hole3.lineTo(0.8, 0.27);
+	hole3.lineTo(0.8, 0.34);
+	hole3.lineTo(0.6, 0.34);
+	hole3.lineTo(0.6, 0.27);
+
+	var hole2 = new THREE.Path();
+	hole2.moveTo(0.2, 0.07);
+	hole2.lineTo(0.8, 0.07);
+	hole2.lineTo(0.8, 0.14);
+	hole2.lineTo(0.2, 0.14);
+	hole2.lineTo(0.2, 0.07);
+
+	testiera_geo.holes.push(hole1);
+	testiera_geo.holes.push(hole3);
+
+
+
+var extrudeSettings = {
+	amount:0.06,
+	bevelEnabled:false
+};
+
+
+	var testiera_geo2 = new THREE.ExtrudeGeometry( testiera_geo, extrudeSettings );
+	var testiera_ant = new THREE.Mesh( testiera_geo2, material  ) ;		
+	testiera_ant.position.set(-0.03,0.5,1);
+	testiera_ant.rotation.y+=Math.PI/2;
+
+
+	
+
+
+	testiera_geo3.holes.push(hole2);
+
+	var testiera_geo4 = new THREE.ExtrudeGeometry( testiera_geo3, extrudeSettings );
+	//var testiera_geo4 = new THREE.ShapeGeometry( testiera_geo3 );
+	var testiera_post = new THREE.Mesh( testiera_geo4, material  ) ;		
+	testiera_post.position.set(1.97,0.51,1);
+	testiera_post.rotation.y+=Math.PI/2;
+
+
+
+
+
+	var testiera_geo5 = new THREE.BoxGeometry( 1.05, 0.25 , 0.06 );
+	testiera_ant2 = new THREE.Mesh( testiera_geo5, material  ) ;
+	testiera_ant2.position.set(0.5,-0.12,0.03);
+	testiera_post2 = new THREE.Mesh( testiera_geo5, material  ) ;
+	testiera_post2.position.set(0.5,-0.13,0.03);
+
+
+
+	testiera_ant.add(testiera_ant2);
+	testiera_post.add(testiera_post2);
+
+	var testiera_geo6 = new THREE.BoxGeometry( 2, 0.7 , 0.06 );
+	var testiera2 = new THREE.Mesh( testiera_geo6, material  ) ;
+	testiera2.rotation.y+=Math.PI/2;
+	testiera2.position.set(-0.2,0.8,0.5);
+
+	bed.add(piede1);
+	bed.add(piede2);
+	bed.add(piede3);
+	bed.add(piede4);
+	bed.add(materasso);
+	bed.add(asse1);
+	bed.add(asse2);
+	bed.add(asse3);
+	bed.add(asse4);
+	bed.add(testiera_ant);
+	bed.add(testiera_post);
+	bed.add(testiera2);
+	
+	scene.add(bed);
+	//return bed;
+
+
+        // position and point the camera to the center of the scene
+        camera.position.set(5,5,5);
+        camera.up = new THREE.Vector3(0,1,0);
+        camera.lookAt(scene.position);
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set(5,5,5);
+        scene.add(spotLight);
+        // add the output of the renderer to the html element
+        $('body').append(renderer.domElement);
+        // call the render function
+        
+        render();
+        function render() {
+          stats.update();
+	trackballControls.update();
+         // render using requestAnimationFrame
+          requestAnimationFrame(render);
+          renderer.render(scene, camera);
+        }
+        function initStats() {
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+          $('body').append(stats.domElement);
+          return stats;
+        }
+      });
+    </script>  
+ </body>
+</html>
