@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Repeat wrapping parquet</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+  <!-- JavaScript libraries -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+	
+	<script src="assets/libs/TrackballControls.js"></script>
+  <!-- Javascript code that runs our Three.js examples --> 
+  <script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+      var stats = initStats();
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      var scene = new THREE.Scene();
+      // create a camera, which defines where we're looking at.
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // create a render and set the size
+	var trackballControls = new THREE.TrackballControls(camera);
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(0xEEEEEE, 1.0);
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+     
+
+      var water = new THREE.Object3D();
+	
+        var mat1 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+	mat1.side = THREE.DoubleSide;
+	var metal = new THREE.MeshLambertMaterial( {color: 0xa8bac3} );
+	var acqua = new THREE.MeshPhongMaterial( {color: 0xccffff});
+	acqua.transparent=true;
+	acqua.opacity=0.2;
+	acqua.side = THREE.DoubleSide;
+	var semisfera1_geo = new THREE.SphereGeometry(0.5, 32, 32, 0, Math.PI, 0, Math.PI);
+	var semisfera1 = new THREE.Mesh( semisfera1_geo, mat1 ) ;
+	semisfera1.rotation.x+=Math.PI/2;
+       
+	var texture1 = THREE.ImageUtils.loadTexture("textures/pulsante.jpg");
+        var mat2 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+       	mat2.map = texture1;
+
+	var semisfera2_geo = new THREE.SphereGeometry(0.4, 32, 32, 0, Math.PI, 0, Math.PI);
+	var semisfera2 = new THREE.Mesh( semisfera2_geo, mat1 ) ;
+	semisfera2.rotation.x+=Math.PI/2;
+
+	var tavoletta_geo = new THREE.TorusGeometry(0.4, 0.1, 16, 32);
+	var tavoletta = new THREE.Mesh( tavoletta_geo, mat1 ) ;
+	tavoletta.rotation.x+=Math.PI/2;
+
+	var dietro_geo = new THREE.CylinderGeometry( 0.15, 0.15, 0.3 ,32);
+	var dietro = new THREE.Mesh( dietro_geo, mat1 ) ;
+	dietro.position.y-=0.5;
+	dietro.position.x+=0.5;
+	dietro.rotation.z+=Math.PI/2;
+	
+	var acqua_geo = new THREE.CylinderGeometry( 0.3, 0.3, 0.01 ,32);
+	var acqua1 = new THREE.Mesh( acqua_geo, acqua ) ;
+	
+	var base_geo = new THREE.CylinderGeometry( 0.35, 0.4, 0.3 ,32);
+	var base = new THREE.Mesh( base_geo, mat1 ) ;
+	base.position.y-=0.5;
+	
+	acqua1.position.y-=0.3;
+	
+
+	var sciacquone_geo = new THREE.BoxGeometry( 0.8, 0.5, 0.03);
+	var sciacquone = new THREE.Mesh( sciacquone_geo, mat2 ) ;
+	sciacquone.position.y+=2;
+	sciacquone.position.x+=0.6;
+	sciacquone.rotation.y+=Math.PI/2;
+
+	
+	var maniglione_geo = new THREE.TorusGeometry(0.1, 0.05, 16, 32, Math.PI);
+	var maniglione = new THREE.Mesh( maniglione_geo, mat1 ) ;
+	maniglione.rotation.z+=Math.PI/2;
+	maniglione.position.z-=0.7;
+	maniglione.position.y+=1;
+	maniglione.position.x-=0.6;
+
+	var maniglione2_geo = new THREE.CylinderGeometry( 0.05, 0.05, 1.2 ,32);
+	var maniglione2 = new THREE.Mesh( maniglione2_geo, mat1 ) ;
+	maniglione2.rotation.z+=Math.PI/2;
+	maniglione2.position.z-=0.7;
+	maniglione2.position.y+=0.9;
+
+	var coperchio_geo = new THREE.CylinderGeometry( 0.45, 0.45, 0.04 ,32);
+	var coperchio = new THREE.Mesh( coperchio_geo, mat1 ) ;
+	coperchio.rotation.z+=5/6*Math.PI/2;
+	coperchio.position.x+=0.5;
+	coperchio.position.y+=0.55;
+	
+	var perno_geo = new THREE.CylinderGeometry( 0.03, 0.03, 0.2 ,32);
+	var perno = new THREE.Mesh( perno_geo, mat1 ) ;
+	perno.rotation.x+=Math.PI/2;
+	perno.position.x+=0.4;
+	perno.position.y+=0.12;
+
+	var maniglione3 = new THREE.Mesh( maniglione2_geo, mat1 ) ;
+	maniglione3.rotation.z+=Math.PI/2;
+	maniglione3.position.z-=0.7;
+	maniglione3.position.y+=1.1;
+	
+
+	water.add(maniglione);
+	water.add(maniglione2);
+	water.add(maniglione3);
+
+
+	water.add(semisfera1);
+	water.add(semisfera2);
+	water.add(tavoletta);
+	water.add(sciacquone);
+	water.add(coperchio);
+	water.add(acqua1);
+	water.add(dietro);
+	water.add(perno);
+	water.add(base);
+	
+      	scene.add(water);
+	
+      
+      // position and point the camera to the center of the scene
+      camera.position.set(5,5,5);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      var ambiLight = new THREE.AmbientLight(0x141414)
+      scene.add(ambiLight);
+      var light = new THREE.DirectionalLight();
+      light.position.set(-10, 10, 10);
+      scene.add(light);
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+      // call the render function
+      
+      // setup the control gui
+  
+      render();
+      
+      function render() {
+        stats.update();
+	trackballControls.update();      
+        // render using requestAnimationFrame
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
+      }
+      function initStats() {
+        stats = new Stats();
+        stats.setMode(0); // 0: fps, 1: ms
+        $('body').append(stats.domElement);
+        return stats;
+      }
+    });
+  </script>  
+ </body>
+</html>

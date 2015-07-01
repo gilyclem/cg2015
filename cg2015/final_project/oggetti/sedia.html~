@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Repeat wrapping parquet</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+  <!-- JavaScript libraries -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+	<script src="assets/libs/TrackballControls.js"></script>
+  <!-- Javascript code that runs our Three.js examples --> 
+  <script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+      var stats = initStats();
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      var scene = new THREE.Scene();
+      // create a camera, which defines where we're looking at.
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // create a render and set the size
+	var trackballControls = new THREE.TrackballControls(camera);
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(0xEEEEEE, 1.0);
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+     
+	var sedia = new THREE.Object3D();
+
+	 var mat1 = new THREE.MeshPhongMaterial( {color: 0x000000});
+	
+        var base = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.5), mat1);
+      	
+	var ruota1 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota1.position.y-=0.44;
+	ruota1.rotation.x+=Math.PI/2;
+	ruota1.position.x+=Math.cos(Math.PI/6)/4;
+	ruota1.position.z+=Math.sin(Math.PI/6)/4;
+
+	var ruota2 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota2.position.y-=0.44;
+	ruota2.rotation.x+=Math.PI/2;
+	ruota2.position.x+=Math.cos(3*Math.PI/6)/4;
+	ruota2.position.z+=Math.sin(3*Math.PI/6)/4;
+	
+	var ruota3 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota3.position.y-=0.44;
+	ruota3.rotation.x+=Math.PI/2;
+	ruota3.position.x+=Math.cos(5*Math.PI/6)/4;
+	ruota3.position.z+=Math.sin(5*Math.PI/6)/4;
+
+	var ruota4 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota4.position.y-=0.44;
+	ruota4.rotation.x+=Math.PI/2;
+	ruota4.position.x+=Math.cos(7*Math.PI/6)/4;
+	ruota4.position.z+=Math.sin(7*Math.PI/6)/4;
+
+	var ruota5 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota5.position.y-=0.44;
+	ruota5.rotation.x+=Math.PI/2;
+	ruota5.position.x+=Math.cos(11*Math.PI/6)/4;
+	ruota5.position.z+=Math.sin(11*Math.PI/6)/4;
+
+	var ruota6 = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.03,32), mat1);
+	ruota6.position.y-=0.44;
+	ruota6.rotation.x+=Math.PI/2;
+	ruota6.position.x+=Math.cos(9*Math.PI/6)/4;
+	ruota6.position.z+=Math.sin(9*Math.PI/6)/4;
+
+	var palo = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.4,32), mat1);
+	palo.position.y-=0.2;
+
+	var bordo1 = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.5,32), mat1);
+	bordo1.position.z+=0.25;
+	bordo1.rotation.z+=Math.PI/2;
+
+	var bordo2 = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.5,32), mat1);
+	bordo2.position.y+=0.65;
+	bordo2.position.z-=0.29;
+	bordo2.rotation.z+=Math.PI/2;
+
+        var schienale = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.7), mat1);
+	schienale.position.z-=0.25;
+	schienale.position.y+=0.3;
+	schienale.rotation.x+=14/15*Math.PI/2;
+
+	var bracciolo_geo = new THREE.TorusGeometry(0.3, 0.03, 16, 32,Math.PI/2);
+	var bracciolo1 = new THREE.Mesh( bracciolo_geo, mat1 ) ;
+	bracciolo1.rotation.y+=Math.PI/2;
+	bracciolo1.rotation.x+=Math.PI/2;
+	bracciolo1.position.z-=0.25;
+	bracciolo1.position.y+=0.05;
+	bracciolo1.position.x+=0.2;
+
+	var bracciolo2 = new THREE.Mesh( bracciolo_geo, mat1 ) ;
+	bracciolo2.rotation.y+=Math.PI/2;
+	bracciolo2.rotation.x+=Math.PI/2;
+	bracciolo2.position.z-=0.25;
+	bracciolo2.position.y+=0.05;
+	bracciolo2.position.x-=0.2;
+
+	var asse1 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.5), mat1);
+	asse1.position.y-=0.4;
+	asse1.rotation.y+=2*Math.PI/6;
+
+	var asse2 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.5), mat1);
+	asse2.position.y-=0.4;
+	asse2.rotation.y+=4*Math.PI/6;
+
+	var asse3 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.03, 0.5), mat1);
+	asse3.position.y-=0.4;
+	asse3.rotation.y+=6*Math.PI/6;
+
+	sedia.add(schienale);
+	sedia.add(bracciolo1);
+	sedia.add(bracciolo2);
+	sedia.add(base);
+	sedia.add(palo);
+      	
+	sedia.add(asse1);
+	sedia.add(asse2);
+	sedia.add(asse3);
+     	sedia.add(ruota1);
+	sedia.add(ruota2);
+	sedia.add(ruota3);	
+	sedia.add(ruota4);
+	sedia.add(ruota5);
+	sedia.add(ruota6);
+	sedia.add(bordo1);
+	sedia.add(bordo2);
+	scene.add(sedia);
+      // position and point the camera to the center of the scene
+      camera.position.set(5,5,5);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      var ambiLight = new THREE.AmbientLight(0x141414)
+      scene.add(ambiLight);
+      var light = new THREE.DirectionalLight();
+      light.position.set(0, 30, 20);
+      scene.add(light);
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+      // call the render function
+      
+      // setup the control gui
+  
+      render();
+      
+      function render() {
+        stats.update();
+	trackballControls.update();      
+        // render using requestAnimationFrame
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
+      }
+      function initStats() {
+        stats = new Stats();
+        stats.setMode(0); // 0: fps, 1: ms
+        $('body').append(stats.domElement);
+        return stats;
+      }
+    });
+  </script>  
+ </body>
+</html>

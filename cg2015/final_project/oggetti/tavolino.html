@@ -36,33 +36,42 @@
       webGLRenderer.setClearColor(0xEEEEEE, 1.0);
       webGLRenderer.setSize(window.innerWidth, window.innerHeight);
      
-	var lato1 = 6;
-	var lato2 = 7;
-	var altezza = 3;
+	
+      var tavolino = new THREE.Object3D();
+	
+	var material3 = new THREE.MeshLambertMaterial( {color: 0xffffff} );
+	var texture3 = THREE.ImageUtils.loadTexture("textures/legno.jpg");
+	material3.map = texture3;
 
-      
-	var texture1 = THREE.ImageUtils.loadTexture("textures/parquet.jpg");
-        texture1.wrapS = THREE.RepeatWrapping;
-        texture1.wrapT = THREE.RepeatWrapping;
-        var mat1 = new THREE.MeshPhongMaterial();
-        mat1.map = texture1;
-	mat1.map.repeat.set(lato1, lato2);
-        var pavimento = new THREE.Mesh(new THREE.BoxGeometry(lato1, 0.2, lato2), mat1);
-      	scene.add(pavimento);
-
-	var texture2 = THREE.ImageUtils.loadTexture("textures/base_legno3.jpg");
-       // texture2.wrapS = THREE.RepeatWrapping;
-        //texture2.wrapT = THREE.RepeatWrapping;
-        var mat2 = new THREE.MeshPhongMaterial();
-        mat2.map = texture2;
-	//mat2.map.repeat.set(lato1, 1);
-        var parete1 = new THREE.Mesh(new THREE.BoxGeometry(lato1, altezza, 0.2), mat2);
-	parete1.position.z-=lato1/2;
-	parete1.position.y+=altezza/2;
-      	scene.add(parete1);
+        var mat1 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+	mat1.side = THREE.DoubleSide;
+	var tavolino_geo = new THREE.CylinderGeometry( 0.6, 0.6, 0.01 ,32);
+	var piano1 = new THREE.Mesh( tavolino_geo, material3 ) ;
+	var piano2 = new THREE.Mesh( tavolino_geo, material3 ) ;
+	var zampa_geo = new THREE.CylinderGeometry( 0.02, 0.01, 0.4 ,4);
+	var zampa1 = new THREE.Mesh( zampa_geo, material3 ) ;
+	var zampa2 = new THREE.Mesh( zampa_geo, material3 ) ;
+	var zampa3 = new THREE.Mesh( zampa_geo, material3 ) ;
+	var zampa4 = new THREE.Mesh( zampa_geo, material3 ) ;
+	piano2.position.y+=0.2;
+	zampa1.position.x=0.6*Math.sin(Math.PI/4);	
+	zampa1.position.z=0.6*Math.cos(Math.PI/4);
+	zampa2.position.x=0.6*Math.sin(-Math.PI/4);	
+	zampa2.position.z=0.6*Math.cos(-Math.PI/4);
+	zampa3.position.x=0.6*Math.sin(3*Math.PI/4);	
+	zampa3.position.z=0.6*Math.cos(3*Math.PI/4);
+	zampa4.position.x=0.6*Math.sin(-3*Math.PI/4);	
+	zampa4.position.z=0.6*Math.cos(-3*Math.PI/4);
+	tavolino.add(piano1);
+	tavolino.add(piano2);
+	tavolino.add(zampa1);
+	tavolino.add(zampa2);
+	tavolino.add(zampa3);
+	tavolino.add(zampa4);
+	scene.add(tavolino);
       
       // position and point the camera to the center of the scene
-      camera.position.set(lato1/2,altezza/2,lato2/2);
+      camera.position.set(5,5,5);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       var ambiLight = new THREE.AmbientLight(0x141414)
       scene.add(ambiLight);

@@ -36,33 +36,41 @@
       webGLRenderer.setClearColor(0xEEEEEE, 1.0);
       webGLRenderer.setSize(window.innerWidth, window.innerHeight);
      
-	var lato1 = 6;
-	var lato2 = 7;
-	var altezza = 3;
 
-      
-	var texture1 = THREE.ImageUtils.loadTexture("textures/parquet.jpg");
-        texture1.wrapS = THREE.RepeatWrapping;
-        texture1.wrapT = THREE.RepeatWrapping;
-        var mat1 = new THREE.MeshPhongMaterial();
-        mat1.map = texture1;
-	mat1.map.repeat.set(lato1, lato2);
-        var pavimento = new THREE.Mesh(new THREE.BoxGeometry(lato1, 0.2, lato2), mat1);
-      	scene.add(pavimento);
-
-	var texture2 = THREE.ImageUtils.loadTexture("textures/base_legno3.jpg");
-       // texture2.wrapS = THREE.RepeatWrapping;
-        //texture2.wrapT = THREE.RepeatWrapping;
-        var mat2 = new THREE.MeshPhongMaterial();
-        mat2.map = texture2;
-	//mat2.map.repeat.set(lato1, 1);
-        var parete1 = new THREE.Mesh(new THREE.BoxGeometry(lato1, altezza, 0.2), mat2);
-	parete1.position.z-=lato1/2;
-	parete1.position.y+=altezza/2;
-      	scene.add(parete1);
+      var maniglia = new THREE.Object3D();
+	
+     
+	
+	var metal = new THREE.MeshLambertMaterial( {color: 0xa8bac3} );
+	
+	
+	var appendino_geo = new THREE.CylinderGeometry( 0.02, 0.02,0.7 ,32);
+	var braccio_geo = new THREE.CylinderGeometry( 0.015, 0.015, 0.15 ,32);
+	
+	var appendino = new THREE.Mesh( appendino_geo, metal ) ;
+	
+	var braccio1 = new THREE.Mesh( braccio_geo, metal ) ;
+	var braccio2 = new THREE.Mesh( braccio_geo, metal ) ;
+	
+	appendino.rotation.z-=Math.PI/2;
+	appendino.position.y-=0.2;
+	appendino.position.z+=0.45;
+	braccio1.position.z+=0.45;
+	braccio1.position.x+=0.25;
+	braccio1.position.y-=0.1;
+	braccio2.position.z+=0.45;
+	braccio2.position.x-=0.25;
+	braccio2.position.y-=0.1;
+	
+	maniglia.add(braccio1);
+	maniglia.add(braccio2);
+	maniglia.add(appendino);
+	maniglia.rotation.z+=Math.PI/2;
+      	scene.add(maniglia);
+	
       
       // position and point the camera to the center of the scene
-      camera.position.set(lato1/2,altezza/2,lato2/2);
+      camera.position.set(5,5,5);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       var ambiLight = new THREE.AmbientLight(0x141414)
       scene.add(ambiLight);

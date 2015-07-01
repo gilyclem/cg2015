@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Pc</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>
+  <!-- JavaScript libraries -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+	<script src="assets/libs/TrackballControls.js"></script>
+  <!-- Javascript code that runs our Three.js examples --> 
+  <script>
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+      var stats = initStats();
+      // create a scene, that will hold all our elements such as objects, cameras and lights.
+      var scene = new THREE.Scene();
+      // create a camera, which defines where we're looking at.
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      // create a render and set the size
+	var trackballControls = new THREE.TrackballControls(camera);
+      var webGLRenderer = new THREE.WebGLRenderer();
+      webGLRenderer.setClearColor(0xEEEEEE, 1.0);
+      webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+     
+	var pc = new THREE.Object3D();
+	var texture1 = THREE.ImageUtils.loadTexture("textures/case.jpg");
+        var mat1 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+       	mat1.map = texture1;
+      
+
+	var texture2 = THREE.ImageUtils.loadTexture("textures/base-legno.jpg");
+        texture2.wrapS = THREE.RepeatWrapping;
+        texture2.wrapT = THREE.RepeatWrapping;
+        var mat2 = new THREE.MeshPhongMaterial();
+        mat2.map = texture2;
+	mat2.map.repeat.set(2, 2);
+	
+	var texture3 = THREE.ImageUtils.loadTexture("textures/monitor.jpg");
+        var mat3 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+       	mat3.map = texture3;
+
+	var mat4 = new THREE.MeshPhongMaterial( {color: 0x000000});
+
+	
+	
+	
+
+	
+
+	var pannello1 = new THREE.Mesh(new THREE.BoxGeometry(2.05,4,0.04), mat2);
+	pannello1.position.x-=0.7;
+	pannello1.position.z-=0.5;
+	pannello1.position.y+=1.25;
+
+	var cassetti1 = new THREE.Mesh(new THREE.BoxGeometry(2.05,2.5,0.6), mat2);
+	cassetti1.position.x-=0.7;
+	cassetti1.position.z-=0.2;
+	cassetti1.position.y+=2;
+
+	var cassetti2 = new THREE.Mesh(new THREE.BoxGeometry(2.05,1,0.6), mat2);
+	cassetti2.position.x-=0.7;
+	cassetti2.position.z-=0.2;
+	cassetti2.position.y-=0.3;
+
+	var cassetti3 = new THREE.Mesh(new THREE.BoxGeometry(2.05,1,0.6), mat2);
+	cassetti3.position.x-=0.7;
+	cassetti3.position.z-=0.2;
+	cassetti3.position.y+=0.66;
+
+	var cassetti4 = new THREE.Mesh(new THREE.BoxGeometry(2.05,1,0.6), mat2);
+	cassetti4.position.x-=0.7;
+	cassetti4.position.z-=0.2;
+	cassetti4.position.y+=1.74;
+
+	var pannello3 = new THREE.Mesh(new THREE.BoxGeometry(1,1,0.04), mat2);
+	pannello3.position.x-=0.18;
+	pannello3.position.y+=2.75;
+	pannello3.position.z+=0.1;
+	var pannello4 = new THREE.Mesh(new THREE.BoxGeometry(1,1,0.04), mat2);
+	pannello4.position.x-=1.2;
+	pannello4.position.y+=2.75;
+	pannello4.position.z+=0.1;
+
+	var pannello5 = new THREE.Mesh(new THREE.BoxGeometry(1,0.9,0.04), mat2);
+	pannello5.position.x-=0.18;
+	pannello5.position.y-=0.3;
+	pannello5.position.z+=0.1;
+	var pannello6 = new THREE.Mesh(new THREE.BoxGeometry(1,0.9,0.04), mat2);
+	pannello6.position.x-=1.2;
+	pannello6.position.y-=0.3;
+	pannello6.position.z+=0.1;
+
+	var pannello7 = new THREE.Mesh(new THREE.BoxGeometry(1,0.9,0.04), mat2);
+	pannello7.position.x-=0.18;
+	pannello7.position.y+=0.65;
+	pannello7.position.z+=0.1;
+	var pannello8= new THREE.Mesh(new THREE.BoxGeometry(1,0.9,0.04), mat2);
+	pannello8.position.x-=1.2;
+	pannello8.position.y+=0.65;
+	pannello8.position.z+=0.1;
+
+	var spessore = new THREE.Mesh(new THREE.BoxGeometry(1.2,0.8,0.04), mat4);
+	var monitor = new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8), mat3);
+	
+	
+	spessore.position.x-=0.7;
+	spessore.position.y+=1.75;
+	spessore.position.z+=0.1;
+	monitor.position.x-=0.7;
+	monitor.position.y+=1.75;
+	monitor.position.z+=0.15;
+
+	var spessore2 = new THREE.Mesh(new THREE.BoxGeometry(0.2,0.0.04,0.3), mat4);
+	var tastiera = new THREE.Mesh(new THREE.PlaneGeometry(0.2,0.3), mat3);
+	
+	
+	spessore.position.x-=0.7;
+	spessore.position.y+=0.75;
+	spessore.position.z+=0.1;
+	monitor.position.x-=0.7;
+	monitor.position.y+=0.75;
+	monitor.position.z+=0.15;
+
+	
+	pc.add(pannello1);
+	pc.add(pannello3);
+	pc.add(pannello4);
+	pc.add(pannello5);
+	pc.add(pannello6);
+	pc.add(pannello7);
+	pc.add(pannello8);
+	pc.add(cassetti1);
+	pc.add(cassetti2);
+	pc.add(cassetti3);
+	pc.add(cassetti4);
+	pc.add(spessore);
+	pc.add(monitor);
+
+
+
+	scene.add(pc);
+      // position and point the camera to the center of the scene
+      camera.position.set(5,5,5);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      var ambiLight = new THREE.AmbientLight(0x141414)
+      scene.add(ambiLight);
+      var light = new THREE.DirectionalLight();
+      light.position.set(0, 5, 5);
+      scene.add(light);
+      // add the output of the renderer to the html element
+      $('body').append(webGLRenderer.domElement);
+      // call the render function
+      
+      // setup the control gui
+  
+      render();
+      
+      function render() {
+        stats.update();
+	trackballControls.update();      
+        // render using requestAnimationFrame
+        requestAnimationFrame(render);
+        webGLRenderer.render(scene, camera);
+      }
+      function initStats() {
+        stats = new Stats();
+        stats.setMode(0); // 0: fps, 1: ms
+        $('body').append(stats.domElement);
+        return stats;
+      }
+    });
+  </script>  
+ </body>
+</html>

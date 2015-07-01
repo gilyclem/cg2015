@@ -40,7 +40,7 @@
 	var bracciolo_geo = new THREE.Shape();
 	bracciolo_geo.moveTo( 0, 0 );
 	bracciolo_geo.lineTo( 1, 0 );
-	bracciolo_geo.lineTo( 1, 1 );
+	bracciolo_geo.lineTo( 1, 0.5 );
 	bracciolo_geo.lineTo( 0, 0.5);
 	bracciolo_geo.lineTo( 0, 0);
 
@@ -48,8 +48,8 @@
 	var texture = THREE.ImageUtils.loadTexture("textures/tessuto_verde.jpg");
 	material.map = texture;
 
-	var material2 = new THREE.MeshLambertMaterial( {color: 0x009933} );
-	var texture2 = THREE.ImageUtils.loadTexture("textures/verde.jpg");
+	var material2 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
+	var texture2 = THREE.ImageUtils.loadTexture("textures/tessuto_verde.jpg");
 	material2.map = texture2;
 
 	var material3 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
@@ -59,7 +59,6 @@
 	var material4 = new THREE.MeshLambertMaterial( {color: 0x0000dc} );
 	var texture4 = THREE.ImageUtils.loadTexture("textures/tessuto_verde.jpg");
 	material4.map = texture4;
-
 	var texture5 = THREE.ImageUtils.loadTexture("textures/tessuto_verde.jpg");
         texture5.wrapS = THREE.RepeatWrapping;
         texture5.wrapT = THREE.RepeatWrapping;
@@ -67,62 +66,72 @@
         mat5.map = texture5;
 	mat5.map.repeat.set(5,1);
 
+
 	var extrudeSettings = {
-	amount:0.2,
+	amount:0.1,
 	bevelEnabled:false
 	};
 
 	var bracciolo_geo2 = new THREE.ExtrudeGeometry( bracciolo_geo, extrudeSettings );
 	var bracciolo1 = new THREE.Mesh( bracciolo_geo2, mat5  ) ;
-	var bracciolo2 = new THREE.Mesh( bracciolo_geo2, mat5  ) ;			
-	bracciolo2.position.z+=2;
+	var bracciolo2 = new THREE.Mesh( bracciolo_geo2, mat5  ) ;
+	//var bracciolo3 = new THREE.Mesh( bracciolo_geo, material  ) ;
+	//var bracciolo4 = new THREE.Mesh( bracciolo_geo, material  ) ;	
+	//var bracciolo5 = new THREE.Mesh( bracciolo_geo, material  ) ;
+	//var bracciolo6 = new THREE.Mesh( bracciolo_geo, material  ) ;				
+	bracciolo1.position.z+=0.51;
+	bracciolo2.position.z+=1.59;
+	//bracciolo3.position.z+=0.6;
+	//bracciolo4.position.z+=1.592;
 	
-	var schienale_geo = new THREE.BoxGeometry( 0.2,1,2.2 );
+	var schienale_geo = new THREE.BoxGeometry( 0.2,1,1.2 );
 	var schienale = new THREE.Mesh( schienale_geo, mat5  ) ;
 
-	var cuscino_geo = new THREE.BoxGeometry( 1.8,0.2,0.8 );
-	var cuscino_geo2 = new THREE.BoxGeometry( 1.8,0.8,0.2 );
+	var cuscino_geo = new THREE.BoxGeometry( 1,0.2,0.8 );
+	var cuscino_geo2 = new THREE.BoxGeometry( 0.8,0.8,0.2 );
 	var base = new THREE.Mesh( cuscino_geo, mat5  ) ;
 	base.rotation.y+=Math.PI/2;
 	base.position.x+=0.4;
 	base.position.z+=1.1;
 	base.position.y+=0.1;
-	var base2_geo = new THREE.BoxGeometry( 2.2,0.05,1.1 );
+	var base2_geo = new THREE.BoxGeometry( 1.2,0.05,1.1 );
 	var base2 = new THREE.Mesh( base2_geo, material3  ) ;
 	base2.rotation.y+=Math.PI/2;
 	base2.position.x+=0.55;
 	base2.position.z+=1.1;
-	base2.position.y-=0.03;
-	var cuscino1 = new THREE.Mesh( cuscino_geo, mat5 ) ;
+	base2.position.y-=0.025;
+	var cuscino1 = new THREE.Mesh( cuscino_geo, mat5  ) ;
 	cuscino1.rotation.y+=Math.PI/2;
 	cuscino1.position.x+=0.45;
 	cuscino1.position.z+=1.1;
 	cuscino1.position.y+=0.2;
-	var cuscino2 = new THREE.Mesh( cuscino_geo2,mat5  ) ;
+	var cuscino2 = new THREE.Mesh( cuscino_geo2, mat5  ) ;
 	cuscino2.rotation.y+=Math.PI/2;
 	
-	var piede_geo = new THREE.CylinderGeometry( 0.09, 0.02, 0.4 , 4 );
+	var piede_geo = new THREE.CylinderGeometry( 0.07, 0.02, 0.6 , 4 );
 	var piede1 = new THREE.Mesh( piede_geo, material3 );
 	var piede2 = new THREE.Mesh( piede_geo, material3 );
 	var piede3 = new THREE.Mesh( piede_geo, material3 );
 	var piede4 = new THREE.Mesh( piede_geo, material3 );
-	piede1.position.set(1,0,2.1);
-	piede2.position.set(1,0,0.1);
-	piede3.position.set(0.15,0,2.1);
-	piede4.position.set(0.15,0,0.1);
+	piede1.position.set(1,-0.3,1.6);
+	piede2.position.set(1,-0.3,0.6);
+	piede3.position.set(0.15,-0.3,1.6);
+	piede4.position.set(0.15,-0.3,0.6);
 
-	/*var cuscino3_geo = new THREE.CylinderGeometry( 0.1, 0.1, 1.7 , 32 );
-	var cuscino3 = new THREE.Mesh( cuscino3_geo, mat5 ) ;
+	var cuscino3_geo = new THREE.CylinderGeometry( 0.1, 0.1, 0.7 , 32 );
+	var cuscino3 = new THREE.Mesh( cuscino3_geo, mat5  ) ;
 	cuscino3.rotation.x+=Math.PI/2;
 	cuscino3.position.x+=0.7;
 	cuscino3.position.z+=1.1;
-	cuscino3.position.y+=0.4;*/
+	cuscino3.position.y+=0.4;
 	cuscino2.position.x+=0.9;
 	cuscino2.position.z+=1.1;
 	cuscino2.position.y+=0.5;
-	schienale.position.set(1,0.5,1.1);	
+	schienale.position.set(1,1,1.1);	
 	divano.add(bracciolo1);
 	divano.add(bracciolo2);
+	//divano.add(bracciolo3);
+	//divano.add(bracciolo4);
 	divano.add(schienale);
 	divano.add(base);
 	divano.add(base2);
@@ -132,7 +141,7 @@
 	divano.add(piede2);
 	divano.add(piede3);
 	divano.add(piede4);
-	//divano.add(cuscino3);
+	divano.add(cuscino3);
 	scene.add(divano);
 	divano.rotation.y+=Math.PI/2;
 

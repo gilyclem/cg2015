@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head> 
-  <title>Repeat wrapping parquet</title> 
+  <title>Pc</title> 
   <style>
     body{
       margin: 0;
@@ -36,38 +36,30 @@
       webGLRenderer.setClearColor(0xEEEEEE, 1.0);
       webGLRenderer.setSize(window.innerWidth, window.innerHeight);
      
-	var lato1 = 6;
-	var lato2 = 7;
-	var altezza = 3;
+	
+	var mat1 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+	var texture3 = THREE.ImageUtils.loadTexture("textures/monitor.jpg");
+        var mat3 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+       	mat3.map = texture3;
 
-      
-	var texture1 = THREE.ImageUtils.loadTexture("textures/parquet.jpg");
-        texture1.wrapS = THREE.RepeatWrapping;
-        texture1.wrapT = THREE.RepeatWrapping;
-        var mat1 = new THREE.MeshPhongMaterial();
-        mat1.map = texture1;
-	mat1.map.repeat.set(lato1, lato2);
-        var pavimento = new THREE.Mesh(new THREE.BoxGeometry(lato1, 0.2, lato2), mat1);
-      	scene.add(pavimento);
+	
 
-	var texture2 = THREE.ImageUtils.loadTexture("textures/base_legno3.jpg");
-       // texture2.wrapS = THREE.RepeatWrapping;
-        //texture2.wrapT = THREE.RepeatWrapping;
-        var mat2 = new THREE.MeshPhongMaterial();
-        mat2.map = texture2;
-	//mat2.map.repeat.set(lato1, 1);
-        var parete1 = new THREE.Mesh(new THREE.BoxGeometry(lato1, altezza, 0.2), mat2);
-	parete1.position.z-=lato1/2;
-	parete1.position.y+=altezza/2;
-      	scene.add(parete1);
-      
+	
+	
+	var spessore = new THREE.Mesh(new THREE.BoxGeometry(1.5,1,0.02), mat1);
+	var monitor = new THREE.Mesh(new THREE.PlaneGeometry(1.5,1), mat3);
+	monitor.position.z+=0.0205;
+
+
+	scene.add(monitor);
+	scene.add(spessore);
       // position and point the camera to the center of the scene
-      camera.position.set(lato1/2,altezza/2,lato2/2);
+      camera.position.set(5,5,5);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       var ambiLight = new THREE.AmbientLight(0x141414)
       scene.add(ambiLight);
       var light = new THREE.DirectionalLight();
-      light.position.set(0, 30, 20);
+      light.position.set(0, 5, 5);
       scene.add(light);
       // add the output of the renderer to the html element
       $('body').append(webGLRenderer.domElement);

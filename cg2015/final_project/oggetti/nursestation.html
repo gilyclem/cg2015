@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <title>Nurse Station</title> 
+  <style>
+    body{
+      margin: 0;
+      overflow: hidden;
+    }
+    #stats {  /* Align stats top-left */
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style> 
+  </head>
+  <body>  
+    <!-- JavaScript libraries -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+    <script src="assets/libs/TrackballControls.js"></script>
+    <!-- Javascript code that runs our Three.js examples --> 
+    <script>
+      // once everything is loaded, we run our Three.js stuff.
+      $(function () {
+         var stats = initStats();
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // create a render and set the size
+        var renderer = new THREE.WebGLRenderer();
+	var trackballControls = new THREE.TrackballControls(camera);
+        renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+	var station = new THREE.Object3D();
+	var tavolo_geo = new THREE.TorusGeometry( 3, 0.6, 6, 32, 7/4*Math.PI );
+	
+	var texture2 = THREE.ImageUtils.loadTexture("textures/base_legno3.jpg");
+       // texture2.wrapS = THREE.RepeatWrapping;
+        //texture2.wrapT = THREE.RepeatWrapping;
+        var mat2 = new THREE.MeshPhongMaterial();
+        mat2.map = texture2;
+	//mat2.map.repeat.set(lato1, 1);
+
+	var plane_geo = new THREE.PlaneGeometry( 1.5,1.5 );
+	var box_geo = new THREE.BoxGeometry( 1.5,1.5,1 );
+	var material = new THREE.MeshLambertMaterial( {color: 0xdcdcdc} );
+	
+	//var texture = THREE.ImageUtils.loadTexture("textures/cassetto.jpg");
+	var tavolo = new THREE.Mesh(tavolo_geo, mat2);
+	var pannello1 = new THREE.Mesh(plane_geo, mat2);
+	
+	pannello1.material.side = THREE.DoubleSide;
+	
+	pannello1.rotation.x+=Math.PI/2;
+	pannello1.position.x+=3;
+	
+	station.add(tavolo);
+	station.add(pannello1);
+	
+	//material.map = texture2;
+	
+	scene.add(station);
+        // position and point the camera to the center of the scene
+        camera.position.set(10,10,10);
+        camera.up = new THREE.Vector3(0,1,0);
+        camera.lookAt(scene.position);
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set(1,1,1);
+        scene.add(spotLight);
+	var Light = new THREE.AmbientLight( 0xcdcdcd );
+       Light.position.set(3,3,3);
+        scene.add(Light);
+        // add the output of the renderer to the html element
+        $('body').append(renderer.domElement);
+        // call the render function
+        
+        render();
+        function render() {
+          stats.update();
+	trackballControls.update();
+         // render using requestAnimationFrame
+          requestAnimationFrame(render);
+          renderer.render(scene, camera);
+        }
+        function initStats() {
+          var stats = new Stats();
+          stats.setMode(0); // 0: fps, 1: ms
+          $('body').append(stats.domElement);
+          return stats;
+        }
+      });
+    </script>  
+ </body>
+</html>

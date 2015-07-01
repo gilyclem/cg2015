@@ -36,33 +36,33 @@
       webGLRenderer.setClearColor(0xEEEEEE, 1.0);
       webGLRenderer.setSize(window.innerWidth, window.innerHeight);
      
-	var lato1 = 6;
-	var lato2 = 7;
-	var altezza = 3;
+	var texture2 = THREE.ImageUtils.loadTexture("textures/crema.jpg");
+        var stoffa = new THREE.MeshPhongMaterial( {color: 0xffffff});
+       	stoffa.map = texture2;
+	stoffa.side = THREE.DoubleSide;
+      var lampada = new THREE.Object3D();
+	var metal = new THREE.MeshLambertMaterial( {color: 0xa8bac3} );
+        var mat1 = new THREE.MeshPhongMaterial( {color: 0xffffff});
+	mat1.side = THREE.DoubleSide;
+	var base_geo = new THREE.CylinderGeometry( 0.1, 0.1, 0.01 ,32);
+	var piano = new THREE.Mesh( base_geo, metal ) ;
+	
+	var zampa_geo = new THREE.CylinderGeometry( 0.01, 0.02, 1,4);
+	var zampa = new THREE.Mesh( zampa_geo, metal ) ;
+	zampa.position.y+=0.5;
 
-      
-	var texture1 = THREE.ImageUtils.loadTexture("textures/parquet.jpg");
-        texture1.wrapS = THREE.RepeatWrapping;
-        texture1.wrapT = THREE.RepeatWrapping;
-        var mat1 = new THREE.MeshPhongMaterial();
-        mat1.map = texture1;
-	mat1.map.repeat.set(lato1, lato2);
-        var pavimento = new THREE.Mesh(new THREE.BoxGeometry(lato1, 0.2, lato2), mat1);
-      	scene.add(pavimento);
-
-	var texture2 = THREE.ImageUtils.loadTexture("textures/base_legno3.jpg");
-       // texture2.wrapS = THREE.RepeatWrapping;
-        //texture2.wrapT = THREE.RepeatWrapping;
-        var mat2 = new THREE.MeshPhongMaterial();
-        mat2.map = texture2;
-	//mat2.map.repeat.set(lato1, 1);
-        var parete1 = new THREE.Mesh(new THREE.BoxGeometry(lato1, altezza, 0.2), mat2);
-	parete1.position.z-=lato1/2;
-	parete1.position.y+=altezza/2;
-      	scene.add(parete1);
+	var semisfera = new THREE.SphereGeometry(0.3, 4, 4, 0, Math.PI, 0, Math.PI);
+	var copriluce = new THREE.Mesh( semisfera, stoffa ) ;
+	copriluce.rotation.x-=Math.PI/2;
+	copriluce.position.y+=1;
+	
+	lampada.add(zampa);
+	lampada.add(piano);
+	lampada.add(copriluce);
+	scene.add(lampada);
       
       // position and point the camera to the center of the scene
-      camera.position.set(lato1/2,altezza/2,lato2/2);
+      camera.position.set(5,5,5);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       var ambiLight = new THREE.AmbientLight(0x141414)
       scene.add(ambiLight);
